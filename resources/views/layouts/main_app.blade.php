@@ -5,8 +5,8 @@
         @include('layouts.css_and_scripts_header')
     </head>
     <body>
-        @yield('header')
+        @include('layouts.main_header')
         @yield('content')
-        @yield('footer')
+        @include('layouts.main_footer')
     </body>
 </html>
