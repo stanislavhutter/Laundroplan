@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\note;
+use App\Models\Note;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
@@ -15,6 +15,10 @@ class NoteController extends Controller
     public function index()
     {
         //
+        $data = Note::latest()->paginate(5);
+
+        return view('Notes.index',compact('data'))
+        ->with('i', (request()->input('page', 1) - 1) * 10);
 
     }
 
@@ -42,8 +46,11 @@ class NoteController extends Controller
             'note_text'=>'required'
         ]);
 
-        note::create($request->all());
-        return view('home');
+        Note::create($request->all());
+
+
+        return redirect()->route('Notes.index')
+        ->with('succes','Note created succesfully');
     }
 
     /**
@@ -66,6 +73,7 @@ class NoteController extends Controller
     public function edit(note $note)
     {
         //
+        return view('notes.edit',compact('note'));
     }
 
     /**
@@ -89,5 +97,10 @@ class NoteController extends Controller
     public function destroy(note $note)
     {
         //
+
+        Note::destroy($note->id);
+
+        return redirect()->route('Notes.index')
+        ->with('succes','Note Deleted');
     }
 }
