@@ -11,7 +11,11 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">Notes</a>
+                <a class="nav-link" href="{{route('note.index')}}">Notes</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('student.index')}}">Studens</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -19,8 +23,8 @@
                 Notes
                 </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{route('Notes.create')}}">Create</a>
-                <a class="dropdown-item" href="{{route('Notes.index')}}">Browse</a>
+                <a class="dropdown-item" href="{{route('note.create')}}">Create</a>
+                <a class="dropdown-item" href="{{route('note.index')}}">Browse</a>
                 <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>

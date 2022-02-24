@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
@@ -15,11 +16,16 @@ class NoteController extends Controller
     public function index()
     {
         //
+
+        $notes = Note::all();
+        return view('note.index',compact('notes'));
+
+        /*
         $data = Note::latest()->paginate(5);
 
         return view('Notes.index',compact('data'))
         ->with('i', (request()->input('page', 1) - 1) * 10);
-
+        */
     }
 
     /**
@@ -30,7 +36,7 @@ class NoteController extends Controller
     public function create()
     {
         //
-        return view('notes.create');
+        return view('note.create');
     }
 
     /**
@@ -49,17 +55,17 @@ class NoteController extends Controller
         Note::create($request->all());
 
 
-        return redirect()->route('Notes.index')
+        return redirect()->route('note.index')
         ->with('succes','Note created succesfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\note  $note
+     * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function show(note $note)
+    public function show(Note $note)
     {
         //
     }
@@ -67,40 +73,56 @@ class NoteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\note  $note
+     * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function edit(note $note)
+    public function edit(Note $note)
     {
         //
-        return view('notes.edit',compact('note'));
+
+
+
+        return view('note.edit',compact('note'));
+
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\note  $note
+     * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, note $note)
+    public function update(Request $request,$id)
     {
         //
+        //$note = Note::find($id);
+        $request->validate([
+            'note_text'=>'required'
+        ]);
+
+        $note = Note::find($id);
+        $note->note_text = $request->get('note_text');
+        $note->update();
+
+        return redirect()->route('note.index')
+        ->with('succes','Note update succesfully');
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\note  $note
+     * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function destroy(note $note)
+    public function destroy(Note $note)
     {
         //
+        $note->delete();
+        return redirect()->route('note.index')->with('success','Note was deleted');
 
-        Note::destroy($note->id);
-
-        return redirect()->route('Notes.index')
-        ->with('succes','Note Deleted');
     }
 }

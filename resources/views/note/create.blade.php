@@ -7,7 +7,7 @@
 
         @if ($errors->any())
             <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <strong>Arrrrrrrrr!</strong> Something conflicts the Pirate Codex.<br><br>
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -16,13 +16,13 @@
             </div>
         @endif
 
-        <form action="{{route('Notes.store')}}" method="POST">
+        <form action="{{route('note.store')}}" method="POST">
             @csrf
 
             <div class="form-group">
                 <label for="note_textarea">Note</label>
                 <textarea class="form-control" id="note_texarea" name="note_text"></textarea>
-                <small>Wirte a Note</small>
+                <small>Write Note</small>
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
 

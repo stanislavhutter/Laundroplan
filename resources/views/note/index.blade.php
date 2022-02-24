@@ -10,16 +10,20 @@
         @endif
 
         <table class="table table-bordered">
-            @foreach ($data as $key => $value)
+
+            @php
+                $i = 0;
+            @endphp
+            @foreach ($notes as $note)
             <tr>
-                <td>{{ $value }}</td>
+                <td>{{ $note }}</td>
                 <td>{{ ++$i }}</td>
-                <td>{{ $value->note_text }}</td>
-                <td>{{ \Str::limit($value->note_text, 100) }}</td>
+                <td>{{ $note->note_text }}</td>
+                <td>{{ \Str::limit($note->note_text, 100) }}</td>
                 <td>
-                    <form action="{{ route('Notes.destroy',$value->id) }}" method="POST">
-                        <a class="btn btn-info" href="{{ route('Notes.show',$value->id) }}">Show</a>
-                        <a class="btn btn-primary" href="{{ route('Notes.edit',$value->id) }}">Edit</a>
+                    <form action="{{ route('note.destroy',$note) }}" method="POST">
+                        <a class="btn btn-info" href="{{ route('note.show',$note) }}">Show</a>
+                        <a class="btn btn-primary" href="{{ route('note.edit',$note) }}">Edit</a>
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>

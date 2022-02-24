@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +19,5 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::resource('Notes',NoteController::class);
+Route::resource('note',NoteController::class);
+Route::resource('student',StudentController::class);

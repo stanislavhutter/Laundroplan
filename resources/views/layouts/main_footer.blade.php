@@ -3,5 +3,5 @@
     <p class="lead">Look! Look at me right now! I'am the footer now.</p>
     <hr class="my-4">
     <p>A pirate said that onece after capturing the footer</p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Arrr</a>
+    <a class="btn btn-primary btn-lg" href="{{route('note.create')}}" role="button">Arrr, leave note</a>
   </div>
